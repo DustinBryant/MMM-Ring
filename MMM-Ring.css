@@ -1,10 +1,12 @@
 /*
- *
  * MMM-Ring
  *
  * Dustin Bryant
  * MIT Licensed.
- *
- * Custom here your css module
- *
  */
+
+.MMM-Ring .video {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}

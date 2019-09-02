@@ -1,18 +1,22 @@
 {
   "name": "MMM-Ring",
   "version": "1.0.0",
-  "description": "Todo: Insert description here!",
+  "description": "Ring.com doorbell ding video stream for MagicMirror",
   "main": "MMM-Ring.js",
+  "dependencies": {
+    "ring-client-api": "^5.6.1",
+    "hls.js": "^0.12.4",
+    "rxjs": "^6.5.2",
+    "chokidar": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DustinBryant/MMM-Ring.git"
+  },
   "author": "Dustin Bryant",
   "license": "MIT",
-  "devDependencies": {
-    "grunt": "latest",
-    "grunt-eslint": "latest",
-    "grunt-jsonlint": "latest",
-    "grunt-markdownlint": "^1.0.13",
-    "grunt-stylelint": "latest",
-    "grunt-yamllint": "latest",
-    "stylelint-config-standard": "latest",
-    "time-grunt": "latest"
-  }
+  "bugs": {
+    "url": "https://github.com/DustinBryant/MMM-Ring/issues"
+  },
+  "homepage": "https://github.com/DustinBryant/MMM-Ring#readme"
 }

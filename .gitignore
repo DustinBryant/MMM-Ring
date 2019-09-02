@@ -4,6 +4,10 @@
 # IDE Code ignoramuses.
 .idea/
 
+# Video Stream info
+*.m3u8
+*.ts
+
 # Various Windows ignoramuses.
 Thumbs.db
 ehthumbs.db
