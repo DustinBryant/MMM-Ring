@@ -1,6 +1,9 @@
 # Visual Studio Code ignoramuses.
 .vscode/
 
+# Node modules
+node_modules/
+
 # IDE Code ignoramuses.
 .idea/
 
