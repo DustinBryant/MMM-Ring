@@ -4,6 +4,7 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 Whenever someone rings your doorbell by pressing the button on your ring device, a video will appear wherever the module is placed within MM. This module will only work for ding events and will not do anything for motion events. Whenever there is no video being displayed nothing else is shown in its place.
 
 **Caveats:**
+* Must have an active Ring subscription
 * Only works with someone ringing your doorbell (no motion events).
 * There is a slight unavoidable delay (couple seconds) with the videos.
 * In your ring app, all of these events will show as answered rings. This may get fixed in the future.
