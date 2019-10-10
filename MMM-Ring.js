@@ -68,6 +68,7 @@ Module.register("MMM-Ring", {
 				var video = document.createElement("video");
 				video.className = "video";
 				video.width = this.config.ringVideoWidth;
+				video.muted = true;
 				wrapper.appendChild(video);
 					
 				if (Hls.isSupported()) {
