@@ -21,7 +21,7 @@ Module.register("MMM-Ring", {
 		ringEmail: undefined,
 		ringPwd: undefined,
 		ring2faRefreshToken: undefined,
-		ringMinutesToStreamVideo: 2,
+		ringMinutesToStreamVideo: 1.5,
 		ringVideoWidth: "600"
 	},
 
@@ -43,7 +43,7 @@ Module.register("MMM-Ring", {
 		return [ "https://cdn.jsdelivr.net/npm/hls.js" ];
 	},
 	
-    getStyles: function() {
+	getStyles: function() {
 		return [ "MMM-Ring.css" ];
 	},
 
@@ -104,7 +104,7 @@ Module.register("MMM-Ring", {
 		}
 	},
 		
-    socketNotificationReceived: function(notification, payload) {
+	socketNotificationReceived: function(notification, payload) {
 		switch(notification) {
 			case "DISPLAY_ERROR":
 				this.displayType = this.DisplayTypes.ERROR;

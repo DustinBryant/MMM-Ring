@@ -41,7 +41,7 @@ To use this module, add the following configuration block to the modules array i
 | `ringEmail`                | *Required* This is the username of your Ring.com account
 | `ringPwd`                  | *Required* This is the password for your Ring.com account
 | `ring2faRefreshToken`      | *Optional* If your Ring.com account uses 2fa you'll want to include your RefreshToken here. If you do not have 2fa then do not include this configuration.
-| `ringMinutesToStreamVideo` | *Optional* How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 2
+| `ringMinutesToStreamVideo` | *Optional* How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5
 | `ringVideoWidth`           | *Optional* Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"
 
 ## Dependencies
