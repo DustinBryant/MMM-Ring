@@ -41,13 +41,13 @@ module.exports = NodeHelper.create({
 		
 		this.cleanUpVideoStreamDirectory();
 	},
-	
-    socketNotificationReceived: function(notification, payload) {
+
+	socketNotificationReceived: function(notification, payload) {
 		if (notification === "BEGIN_RING_MONITORING") {
 			this.config = payload;
 			this.monitorRingActivity();
 		}
-    },
+	},
     
 	cleanUpVideoStreamDirectory: async function() {
 		if (!(await util.promisify(fs.exists)(this.videoOutputDirectory))) {
@@ -150,7 +150,12 @@ module.exports = NodeHelper.create({
 			this.stopWatchingFile();
 			this.sipSession = null;
 		});
-		setTimeout(() => this.sipSession.stop(), streamTimeOut);
+		setTimeout(function() {
+			if (this.sipSession) {
+				this.sipSession.stop();
+				this.sipSession = null;
+			}
+		}, streamTimeOut);
 	},
 	
 	stopWatchingFile: function() {
