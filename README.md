@@ -13,10 +13,14 @@ Whenever someone rings your doorbell by pressing the button on your ring device,
 * Though it will work most of the time, there are slight chances a video may not get picked up/streamed properly. This is due partly because of using an unoffical API and sometimes hls (video component used for streaming) picks up the stream too early or faults for other reasons.
 
 ## Installation
-1. Using the terminal, navigate to your `MagicMirror/modules` folder
-2. Execute: `git clone https://github.com/DustinBryant/MMM-Ring.git`
-3. Navigate to this new folder `cd MMM-Ring`
-4. Execute: `npm install`
+1. Install ffmpeg if it isn't already installed
+```
+sudo apt-get install ffmpeg
+```
+2. Using the terminal, navigate to your `MagicMirror/modules` folder
+3. Execute: `git clone https://github.com/DustinBryant/MMM-Ring.git`
+4. Navigate to this new folder `cd MMM-Ring`
+5. Execute: `npm install`
 
 ## Using the module
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
