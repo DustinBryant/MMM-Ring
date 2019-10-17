@@ -150,10 +150,10 @@ module.exports = NodeHelper.create({
 			this.stopWatchingFile();
 			this.sipSession = null;
 		});
-		setTimeout(function() {
+		setTimeout(() => {
+			console.log(`timeout hit`);
 			if (this.sipSession) {
 				this.sipSession.stop();
-				this.sipSession = null;
 			}
 		}, streamTimeOut);
 	},
