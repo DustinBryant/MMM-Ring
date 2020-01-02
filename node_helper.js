@@ -28,6 +28,7 @@ module.exports = NodeHelper.create({
 		this.watcher = null;
 		this.audioPlaylistFile = "stream.m3u8";
 		this.sipSession = null;
+		this.sessionRunning = false;
 	},
 	
 	stop: function() {
@@ -114,14 +115,14 @@ module.exports = NodeHelper.create({
 	},
 	
 	startSession: async function(camera) {
-		if (this.sipSession) {
+		if (this.sipSession || this.sessionRunning === true) {
 			return;
 		}
 		
+		this.sessionRunning = true;
 		this.toLog(`${camera.name} had its doorbell rung! Preparing video stream.`);
-		
+
 		await this.cleanUpVideoStreamDirectory();
-		
 		this.watchForStreamStarted();
 		
 		const streamTimeOut = this.config.ringMinutesToStreamVideo * 60 * 1000;
@@ -149,6 +150,7 @@ module.exports = NodeHelper.create({
 			this.sendSocketNotification("VIDEO_STREAM_ENDED", null);
 			this.stopWatchingFile();
 			this.sipSession = null;
+			this.sessionRunning = false;
 		});
 		setTimeout(() => {
 			console.log(`timeout hit`);
