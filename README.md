@@ -38,18 +38,18 @@ To use this module, add the following configuration block to the modules array i
 ## General configuration options
 | Option                     | Description
 |--------------------------- |-----------
-| `ringEmail`                | *Required* This is the username of your Ring.com account
-| `ringPwd`                  | *Required* This is the password for your Ring.com account
-| `ring2faRefreshToken`      | *Optional* If your Ring.com account uses 2fa you'll want to include your RefreshToken here. If you do not have 2fa then do not include this configuration.
-| `ringMinutesToStreamVideo` | *Optional* How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5
-| `ringVideoWidth`           | *Optional* Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"
+| `ringEmail`                | (*Required if not using 2fa*) This is the username of your Ring.com account
+| `ringPwd`                  | (*Required if not using 2fa*) This is the password for your Ring.com account
+| `ring2faRefreshToken`      | (*Optional*) If your Ring.com account uses 2fa you'll want to look at the [Two Factor Auth (ring2faRefreshToken config option)](https://github.com/DustinBryant/MMM-Ring/wiki/Two-Factor-Auth-(ring2faRefreshToken-config-option)) wiki entry for how to set this up. If you do **NOT** have 2fa then do not include this configuration option.
+| `ringMinutesToStreamVideo` | (*Optional*) How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5
+| `ringVideoWidth`           | (*Optional*) Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"
 
 ## Dependencies
 (installed via `npm install` in the installation instructions above)
-* [ring-client-api](https://www.npmjs.com/package/ring-client-api) - version 5.8.2 or higher
+* [ring-client-api](https://www.npmjs.com/package/ring-client-api) - version 5.12.1 or higher
 * [hls.js](https://www.npmjs.com/package/hls.js/v/canary) - version 0.12.4 or higher
-* [rxjs](https://www.npmjs.com/package/rxjs) - version 6.5.2 or higher
-* [chokidar](https://www.npmjs.com/package/chokidar) - version 3.0.2 or higher
+* [rxjs](https://www.npmjs.com/package/rxjs) - version 6.5.3 or higher
+* [chokidar](https://www.npmjs.com/package/chokidar) - version 3.3.0 or higher
 
 ## Thanks
 Huge thanks to [dgreif](https://github.com/dgreif) on github for doing the reverse engineering to figure out how to get a video stream from a ring event (see [ring-client-api](https://www.npmjs.com/package/ring-client-api) dependency)). Without it, this module wouldn't be possible!
