@@ -1,6 +1,9 @@
 # Visual Studio Code ignoramuses.
 .vscode/
 
+# Env file for refresh token
+.env
+
 # Node modules
 node_modules/
 

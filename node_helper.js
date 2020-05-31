@@ -20,9 +20,12 @@ const fileWatcher = require("chokidar");
 
 module.exports = NodeHelper.create({
 	
+	requiresVersion: "2.11.0",
+	
 	start: function() {
-		console.log("Starting module: MMM-Ring");
+		this.toLog("Starting module: MMM-Ring");
 		this.videoOutputDirectory = pathApi.join(this.path, "public");
+		this.envFile = pathApi.join(this.path, ".env");
 		this.ringApi = null;
 		this.config = null;
 		this.watcher = null;
@@ -32,7 +35,7 @@ module.exports = NodeHelper.create({
 	},
 	
 	stop: function() {
-		console.log("Stopping module helper: MMM-Ring");
+		this.toLog("Stopping module helper: MMM-Ring");
 		this.stopWatchingFile();
 		
 		if (this.sipSession) {
@@ -43,9 +46,16 @@ module.exports = NodeHelper.create({
 		this.cleanUpVideoStreamDirectory();
 	},
 
-	socketNotificationReceived: function(notification, payload) {
+	socketNotificationReceived: async function(notification, payload) {
 		if (notification === "BEGIN_RING_MONITORING") {
 			this.config = payload;
+			
+			if (!(await util.promisify(fs.exists)(this.envFile))) {
+				await util.promisify(fs.writeFile)(this.envFile, `RING_2FA_REFRESH_TOKEN=${this.config.ring2faRefreshToken}`);
+			}
+			
+			require('dotenv').config({ path: this.envFile });
+			
 			this.monitorRingActivity();
 		}
 	},
@@ -62,12 +72,24 @@ module.exports = NodeHelper.create({
 	
 	monitorRingActivity: async function() {
 		this.ringApi = new mainRingApi.RingApi({
-			email: this.config.ringEmail,
-			password: this.config.ringPwd,
-			refreshToken: this.config.ring2faRefreshToken,
+			refreshToken: process.env.RING_2FA_REFRESH_TOKEN,
 			debug: true,
 			cameraDingsPollingSeconds: 2
 		});
+		
+		this.ringApi.onRefreshTokenUpdated.subscribe(async ({ newRefreshToken, oldRefreshToken }) => {
+				this.toLog('Refresh Token Updated');
+				
+				if (!oldRefreshToken) {
+					return;
+				}
+				
+				const currentConfig = await util.promisify(fs.readFile)(this.envFile);
+				const updateConfig = currentConfig.toString().replace(oldRefreshToken, newRefreshToken);
+				await util.promisify(fs.writeFile)(this.envFile, updateConfig);
+			}
+		);
+		
 		const locations = await this.ringApi.getLocations();
 		const allCameras = await this.ringApi.getCameras();
 		
@@ -153,7 +175,7 @@ module.exports = NodeHelper.create({
 			this.sessionRunning = false;
 		});
 		setTimeout(() => {
-			console.log(`timeout hit`);
+			this.toLog(`timeout hit`);
 			if (this.sipSession) {
 				this.sipSession.stop();
 			}

@@ -29,6 +29,18 @@ Module.register("MMM-Ring", {
 		this.errorMessage = '';
 		this.displayType = this.DisplayTypes.NONE;
 		this.hls = '';
+		
+		if (this.config.ringEmail !== undefined || this.config.ringPwd !== undefined) {
+			this.displayType = this.DisplayTypes.ERROR;
+			this.errorMessage = "ringEmail and ringPwd are no longer valid configuration properties. Ring now requires a 2 factor authentication (2fa) refresh token. Must use ring2faRefreshToken property in config.";
+			return;
+		}
+		
+		if (this.config.ring2faRefreshToken === undefined) {
+			this.displayType = this.DisplayTypes.ERROR;
+			this.errorMessage = "Must provide ring2faRefreshToken within the MMM-Ring configuration within the Magic Mirror config file.";
+			return;
+		}
 					
 		if (this.config.ringMinutesToStreamVideo > 5) {
 			this.displayType = this.DisplayTypes.ERROR;
