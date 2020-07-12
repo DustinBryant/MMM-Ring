@@ -1,7 +1,3 @@
-# New maintainer needed!
-
-The original developer of this module no longer has a Ring device and has since replaced it. Because of this, it isn't possible to continue maintaining this repository and future issues that may come as a result of changes from Ring. If you are interested in taking this over, please let me know so I can officially deprecate this repository and point to the new owner's/maintainer's repository.
-
 # MMM-Ring
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
