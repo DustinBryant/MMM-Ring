@@ -11,7 +11,7 @@ Whenever someone rings your doorbell by pressing the button on your ring device,
 **Caveats:**
 
 - Must have an active Ring subscription
-- Works with someone ringing your doorbell or motion at cameras.
+- Only displays the earliest stream sent to it with no way to view multiple streams.
 - There is a slight unavoidable delay (couple seconds) with the videos.
 - In your ring app, all of these events will show as answered rings or answered motion. This may get fixed in the future.
 - You will not be able to interact, talk with, or hear the person on the other end through MM.
@@ -52,7 +52,7 @@ To use this module, add the following configuration block to the modules array i
 | `ring2faRefreshToken`      | (_Required_) Look at the [Refresh Tokens](https://github.com/DustinBryant/MMM-Ring/wiki/Refresh-Tokens)) wiki entry for how to set this up. |
 | `ringMinutesToStreamVideo` | (_Optional_) How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5 |
 | `ringVideoWidth`           | (_Optional_) Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"                                                  |
-| `ringStreamMotion`           | (_Optional_) Displays stream if there is motion, not just a ring. If more than one motion event or doorbell press happens within the "ringMinutesToStreamVideo" length of time it will prioitize the first even that was triggered. Motion can also not be triggered more than once within 65 seconds.  <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
+| `ringStreamMotion`           | (_Optional_) Displays stream if there is motion, not just a ring. If more than one motion event or doorbell press happens within the "ringMinutesToStreamVideo" length of time it will prioitize the first event that was triggered. Motion can also not be triggered more than once within 65 seconds.  <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
 
 ## Dependencies
 
