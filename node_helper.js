@@ -149,21 +149,41 @@ module.exports = NodeHelper.create({
     allCameras.forEach((camera) => {
       camera.onDoorbellPressed.subscribe(async () => {
         if (!this.sipSession) {
-          await this.startSession(camera);
+          await this.startSession(camera, "ring");
         }
       });
+      this.toLog(`Actively listening for doorbell presses`);
+      //Check config value if node app should stream motion
+      if(this.config.ringStreamMotion){
+        camera.onMotionDetected.subscribe(async (newMotion) => {
+          //NewMotion is a true false value indicating whether the motion is new based on the dings made in the last 65 seconds
+          // This prevents the stream from being triggered on startup because it would not be an active motion event.
+          if (!this.sipSession && newMotion) {
+            await this.startSession(camera, "motion");
+          }
+        });
+        this.toLog(`Actively listening for Motion events`);
+      }
+      
     });
 
-    this.toLog(`Actively listening for doorbell presses`);
+    
   },
 
-  startSession: async function (camera) {
+  startSession: async function (camera, type) {
     if (this.sipSession || this.sessionRunning === true) {
       return;
     }
 
     this.sessionRunning = true;
-    this.toLog(`${camera.name} had its doorbell rung! Preparing video stream.`);
+    if(type === "ring"){
+      this.toLog(`${camera.name} had its doorbell rung! Preparing video stream.`);
+    }else if(type === "motion"){
+      this.toLog(`${camera.name} has sensed motion Preparing video stream.`);
+    }else{
+      this.toLog(`${camera.name} been summoned by something other than a ring or motion. (spooky) Preparing video stream.`); 
+    }
+    
 
     await this.cleanUpVideoStreamDirectory();
     this.watchForStreamStarted();

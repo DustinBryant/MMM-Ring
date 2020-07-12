@@ -20,6 +20,7 @@ Module.register("MMM-Ring", {
   defaults: {
     ringEmail: undefined,
     ringPwd: undefined,
+    ringStreamMotion: false,
     ring2faRefreshToken: undefined,
     ringMinutesToStreamVideo: 1.5,
     ringVideoWidth: "600"
