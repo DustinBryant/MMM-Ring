@@ -6,14 +6,14 @@ The original developer of this module no longer has a Ring device and has since 
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Whenever someone rings your doorbell by pressing the button on your ring device, a video will appear wherever the module is placed within MM. This module will only work for ding events and will not do anything for motion events. Whenever there is no video being displayed nothing else is shown in its place.
+Whenever someone rings your doorbell by pressing the button on your ring device, or when motion is detected a video will appear wherever the module is placed within MM. Whenever there is no video being displayed nothing else is shown in its place.
 
 **Caveats:**
 
 - Must have an active Ring subscription
-- Only works with someone ringing your doorbell (no motion events).
+- Works with someone ringing your doorbell or motion at cameras.
 - There is a slight unavoidable delay (couple seconds) with the videos.
-- In your ring app, all of these events will show as answered rings. This may get fixed in the future.
+- In your ring app, all of these events will show as answered rings or answered motion. This may get fixed in the future.
 - You will not be able to interact, talk with, or hear the person on the other end through MM.
 - The RingAPI being used is unofficial which means there could be potential issues if Ring ever decides to make changes.
 - Though it will work most of the time, there are slight chances a video may not get picked up/streamed properly. This is due partly because of using an unoffical API and sometimes hls (video component used for streaming) picks up the stream too early or faults for other reasons.
@@ -52,7 +52,7 @@ To use this module, add the following configuration block to the modules array i
 | `ring2faRefreshToken`      | (_Required_) Look at the [Refresh Tokens](https://github.com/DustinBryant/MMM-Ring/wiki/Refresh-Tokens)) wiki entry for how to set this up. |
 | `ringMinutesToStreamVideo` | (_Optional_) How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5 |
 | `ringVideoWidth`           | (_Optional_) Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"                                                  |
-| `ringStreamMotion`           | (_Optional_) Displays stream if there is motion, not just a ring. <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
+| `ringStreamMotion`           | (_Optional_) Displays stream if there is motion, not just a ring. If more than one motion event or doorbell press happens within the "ringMinutesToStreamVideo" length of time it will prioitize the first even that was triggered. Motion can also not be triggered more than once within 65 seconds.  <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
 
 ## Dependencies
 
