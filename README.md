@@ -52,6 +52,7 @@ To use this module, add the following configuration block to the modules array i
 | `ring2faRefreshToken`      | (_Required_) Look at the [Refresh Tokens](https://github.com/DustinBryant/MMM-Ring/wiki/Refresh-Tokens)) wiki entry for how to set this up. |
 | `ringMinutesToStreamVideo` | (_Optional_) How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5 |
 | `ringVideoWidth`           | (_Optional_) Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"                                                  |
+| `ringStreamMotion`           | (_Optional_) Displays stream if there is motion, not just a ring. <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
 
 ## Dependencies
 

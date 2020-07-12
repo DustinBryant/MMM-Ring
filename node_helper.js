@@ -152,6 +152,18 @@ module.exports = NodeHelper.create({
           await this.startSession(camera);
         }
       });
+      //Check config value if node app should stream motion
+      if(this.config.ringStreamMotion){
+        camera.onMotionDetected.subscribe(async (newMotion) => {
+          //NewMotion is a true false value indicating whether the motion is new based on the dings made in the last 65 seconds
+          // This in theory isn't needed because other logic handles calling duplicate streams but this is best practice.
+          if (!this.sipSession && newMotion) {
+            this.toLog("Found Motion");
+            await this.startSession(camera);
+          }
+        });
+      }
+      
     });
 
     this.toLog(`Actively listening for doorbell presses`);
