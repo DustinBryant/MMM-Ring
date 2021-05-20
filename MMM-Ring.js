@@ -23,10 +23,11 @@ Module.register("MMM-Ring", {
     ringStreamMotion: false,
     ring2faRefreshToken: undefined,
     ringMinutesToStreamVideo: 1.5,
-    ringVideoWidth: "600"
+    ringVideoWidth: "600",
+    muted: false
   },
 
-  start: function () {
+  start: function() {
     this.errorMessage = "";
     this.displayType = this.DisplayTypes.NONE;
     this.hls = "";
@@ -58,17 +59,17 @@ Module.register("MMM-Ring", {
     this.sendSocketNotification("BEGIN_RING_MONITORING", this.config);
   },
 
-  getScripts: function () {
+  getScripts: function() {
     return ["https://cdn.jsdelivr.net/npm/hls.js"];
   },
 
-  getStyles: function () {
+  getStyles: function() {
     return ["MMM-Ring.css"];
   },
 
   requiresVersion: "2.1.0", // Required version of MagicMirror
 
-  getDom: function () {
+  getDom: function() {
     if (this.hls) {
       this.hls.destroy();
       this.hls = null;
@@ -87,16 +88,20 @@ Module.register("MMM-Ring", {
         var video = document.createElement("video");
         video.className = "video";
         video.width = this.config.ringVideoWidth;
-        video.muted = true;
+        if (this.config.muted) {
+          video.muted = true;
+        }
         wrapper.appendChild(video);
 
         if (Hls.isSupported()) {
-          const config = { liveDurationInfinity: true };
+          const config = {
+            liveDurationInfinity: true
+          };
 
           var hls = new Hls(config);
           this.hls = hls;
 
-          hls.on(Hls.Events.ERROR, function (event, data) {
+          hls.on(Hls.Events.ERROR, function(event, data) {
             var errorType = data.type;
             var errorDetails = data.details;
             var errorFatal = data.fatal;
@@ -107,15 +112,15 @@ Module.register("MMM-Ring", {
 
           hls.attachMedia(video);
 
-          hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+          hls.on(Hls.Events.MEDIA_ATTACHED, function() {
             hls.loadSource(streamPath);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
               video.play();
             });
           });
         } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
           video.src = streamPath;
-          video.addEventListener("loadedmetadata", function () {
+          video.addEventListener("loadedmetadata", function() {
             video.play();
           });
         }
@@ -124,7 +129,7 @@ Module.register("MMM-Ring", {
     }
   },
 
-  socketNotificationReceived: function (notification, payload) {
+  socketNotificationReceived: function(notification, payload) {
     switch (notification) {
       case "DISPLAY_ERROR":
         this.displayType = this.DisplayTypes.ERROR;
