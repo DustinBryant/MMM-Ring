@@ -16,10 +16,11 @@ Whenever someone rings your doorbell by pressing the button on your ring device,
 
 ## Installation
 
-1. Install ffmpeg if it isn't already installed
+1. Install ffmpeg if it isn't already installed. You need to install ffmpeg-for-homebridge to support audio.
 
 ```
-sudo apt-get install ffmpeg
+sudo curl -Lf# https://github.com/homebridge/ffmpeg-for-homebridge/releases/latest/download/ffmpeg-raspbian-armv6l.tar.gz | sudo tar xzf - -C / --no-same-owner
+
 ```
 
 2. Using the terminal, navigate to your `MagicMirror/modules` folder
@@ -48,7 +49,8 @@ To use this module, add the following configuration block to the modules array i
 | `ring2faRefreshToken`      | (_Required_) Look at the [Refresh Tokens](https://github.com/DustinBryant/MMM-Ring/wiki/Refresh-Tokens)) wiki entry for how to set this up. |
 | `ringMinutesToStreamVideo` | (_Optional_) How long a ding event video stream should last before ending. MAX 5 minutes! <br><br>**Type:** `int`(minutes) <br>Default: 1.5 |
 | `ringVideoWidth`           | (_Optional_) Width of the video display. <br><br>**Type:** `string`(px) <br>Default: "600"                                                  |
-| `ringStreamMotion`           | (_Optional_) Displays stream if there is motion, not just a ring. If more than one motion event or doorbell press happens within the "ringMinutesToStreamVideo" length of time it will prioitize the first event that was triggered. Motion can also not be triggered more than once within 65 seconds.  <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
+| `ringStreamMotion`         | (_Optional_) Displays stream if there is motion, not just a ring. If more than one motion event or doorbell press happens within the "ringMinutesToStreamVideo" length of time it will prioitize the first event that was triggered. Motion can also not be triggered more than once within 65 seconds.  <br><br>**Type:** `boolean`(true/false) <br>Default: false                                                  |
+|`muted`| (_Optional_) Mute video stream. <br><br>**Type:** `boolean`(true/false) <br>Default: "false"  |
 
 ## Dependencies
 
