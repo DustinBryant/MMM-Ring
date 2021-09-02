@@ -56,7 +56,7 @@ To use this module, add the following configuration block to the modules array i
 
 (installed via `npm install` in the installation instructions above)
 
-- [ring-client-api](https://www.npmjs.com/package/ring-client-api) - version 8.2.0 or higher
+- [ring-client-api](https://www.npmjs.com/package/ring-client-api) - version 9.21.0 or higher
 - [hls.js](https://www.npmjs.com/package/hls.js/v/canary) - version 0.13.0 or higher
 - [rxjs](https://www.npmjs.com/package/rxjs) - version 6.5.5 or higher
 - [chokidar](https://www.npmjs.com/package/chokidar) - version 3.4.0 or higher
