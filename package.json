@@ -7,7 +7,7 @@
     "chokidar": "^3.5.1",
     "dotenv": "^8.6.0",
     "hls.js": "^0.13.0",
-    "ring-client-api": "^9.18.1",
+    "ring-client-api": "^9.21.0",
     "rxjs": "^6.6.7"
   },
   "repository": {
