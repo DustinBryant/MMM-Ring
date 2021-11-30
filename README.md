@@ -1,3 +1,5 @@
+# DEPRICATED - original creator no longer has a Ring device and can not maintain this code base as a result
+
 # MMM-Ring
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
